@@ -18,6 +18,7 @@ module.exports = {
     }
 
     let data = entities.map((entity) => {
+      // Here we are using lodash to select the fields / nested fields we don't want
       let newEntity = _.omit(
         entity,
         "author.email",
@@ -27,6 +28,8 @@ module.exports = {
         "created_at",
         "updated_at"
       );
+
+      // This is the native Strapi "clean" function
       return sanitizeEntity(newEntity, { model: strapi.models.blogpost });
     });
 
